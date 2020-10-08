@@ -1,0 +1,2261 @@
+React
+
+*****making use of react with cdn
+in body insert React, React-Dom, and babel
+ <body>
+    <div class="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      console.log(React)
+    </script>
+  </body>
+
+***Example1
+
+Change color of inputfield linked to state 
+render() {
+    let inputStyle = {
+      border: '1px solid black'
+    };
+    // change code below this line
+ if (this.state.input.length > 0){
+   inputStyle={border: '3px solid lightblue'}
+ } 
+    // change code above this line
+    return (
+      <div>
+        <h3>Don't Type Too Much:</h3>
+        <input
+          type="text"
+          style={inputStyle}
+          value={this.state.input}
+          onChange={this.handleChange} />
+      </div>
+
+***create new array in memory from old array using ES6 Spread operator
+state = {
+    persons: [
+      { name: "Max", age: 28 },
+      { name: "Manu", age: 29 },
+      { name: "Stephanie", age: 26 },
+    ]
+
+const persons = [...this.state.persons]
+
+***convert array items to strings and add spaces or separatos using join
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.join();
+// Or can do fruits.join(" and ");
+
+
+***Map Over Array and return a list of items! very cool!
+const items = this.state.toDoList.map(i => <li>{i}</li>);
+
+***Gives 50/50 chance
+const expression = Math.random() >= .5  
+
+***Gives function 50/50 heads or tails and changes picture
+function coinToss() {
+  // This function will randomly return either 'heads' or 'tails'.
+  return Math.random() < 0.5 ? 'heads' : 'tails';
+}
+
+if (coinToss() === "heads"){
+  img = <img src={pics.kitty} />
+} else {img = <img src={pics.doggy} />}
+
+const pics = {
+  kitty: 'https://s3.amazonaws.com/codecademy-content/courses/React/react_photo-kitty.jpg',
+  doggy: 'https://s3.amazonaws.com/codecademy-content/courses/React/react_photo-puppy.jpeg'
+};
+let img;
+
+
+***Conditionaly render using && 
+const judgmental = Math.random() < 0.5;
+
+const favoriteFoods = (
+  <div>
+    <h1>My Favorite Foods</h1>
+    <ul>
+      <li>Sushi Burrito</li>
+      <li>Rhubarb Pie</li>
+     {!judgmental && <li>Nacho Cheez Straight Out The Jar</li>}
+      <li>Broiled Grapefruit</li>
+    </ul>
+  </div>
+);
+
+***Map over array
+const strings = ['Home', 'Shop', 'About Me'];
+
+const listItems = strings.map(string => <li>{string}</li>);
+
+<ul>{listItems}</ul>
+
+
+***Filter from array in state and then map over array
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [
+        {
+          username: 'Jeff',
+          online: true
+        },
+        {
+          username: 'Alan',
+          online: false
+        },
+        {
+          username: 'Mary',
+          online: true
+        },
+        {
+          username: 'Jim',
+          online: false
+        },
+        {
+          username: 'Sara',
+          online: true
+        },
+        {
+          username: 'Laura',
+          online: true
+        }
+      ]
+    }
+  }
+  
+  render() {
+    const usersOnline = this.state.users.filter(i => i.online == true) ; // change code here
+    const renderOnline = usersOnline.map(i => <li key={i.username + 1}>{i.username}</li>); // change code here
+    return (
+       <div>
+         <h1>Current Online Users:</h1>
+         <ul>
+           {renderOnline}
+         </ul>
+       </div>
+    );
+  }
+};
+
+***Adding a key to list when maping
+const peopleLis = people.map((person, i) =>
+  // expression goes here:
+<li key={'person_' + i}>{person}</li>
+);
+
+***Map over state array and return component with properties
+state = {
+    persons: [
+      { name: "Max", age: 28 },
+      { name: "Manu", age: 29 },
+      { name: "Stephanie", age: 26 },
+    ],
+    otherState: "some other value",
+    showPersons: false,
+  };
+// In render
+ {this.state.persons.map(person => {
+            return <Person name={person.name} age={person.age} key={person.name +1} />
+          })}
+          
+//Component file 
+import React from 'react';
+
+import './Person.css';
+
+const person = ( props ) => {
+    return (
+        <div className="Person">
+            <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>
+            <p>{props.children}</p>
+            <input type="text" onChange={props.changed} value={props.name} />
+        </div>
+    )
+};
+
+export default person;
+
+*****Style inline using background image
+import vendingMachineImg from "../VendingMachine.png";
+
+export default class VendingMachine extends Component {
+  render() {
+    return (
+      <div style={{ backgroundImage: `url(${vendingMachineImg})` }}>
+
+
+***Linking and rendering images with JS and JSX
+const redPanda = {
+  src: 'https://upload.wikimedia.org/wikipedia/commons/b/b2/Endangered_Red_Panda.jpg',
+  alt: 'Red Panda',
+  width:  '200px'
+};
+
+class RedPanda extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Cute Red Panda</h1>
+        <img 
+          src={redPanda.src}
+          alt={redPanda.alt}
+          width={redPanda.width} />
+      </div>
+    );
+  }
+}
+
+
+***Class with Array and mapped NAVBAR LINKS 
+import React from 'react';
+
+export class NavBar extends React.Component {
+  render() {
+    const pages = ['home', 'blog', 'pics', 'bio', 'art', 'shop', 'about', 'contact'];
+    const navLinks = pages.map(page => {
+      return (
+        <a href={'/' + page}>
+          {page}
+        </a>
+      )
+    });
+
+    return <nav>{navLinks}</nav>;
+  }
+}
+
+
+
+***Conditional render for isSigned in
+export class Greeting extends React.Component {
+  render() {
+  	if (this.props.signedIn == false) {
+  	  return <h1>GO AWAY</h1>;
+  	} else {
+  	  return <h1>Hi there, {this.props.name}!</h1>;
+  	}
+  }
+}
+
+***Conditional render if props.children have more then one item in array
+
+**Ap.js
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <List type='Living Musician'>
+          <li>Sachiko M</li>
+          <li>Harvey Sid Fisher</li>
+        </List>
+        <List type='Living Cat Musician'>
+          <li>Nora the Piano Cat</li>
+        </List>
+      </div>
+    );
+  }
+}
+
+
+**List.js
+export class List extends React.Component {
+  render() {
+    let titleText = `Favorite ${this.props.type}`;
+    if (this.props.children instanceof Array) {
+    	titleText += 's';
+    }
+    return (
+      <div>
+        <h1>{titleText}</h1>
+        <ul>{this.props.children}</ul>
+      </div>
+    );
+  }
+}
+
+
+***Changing background color linked to state using const and ternary
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const green = '#39D1B4';
+const yellow = '#FFD712';
+
+class Toggle extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      color: green
+    } 
+    this.changeColor = this.changeColor.bind(this);
+  }
+changeColor() {
+ const newColor = this.state.color == green ? yellow : green ;
+    this.setState({ color: newColor });
+}
+
+  render() {
+    return (
+      <div style={{background: this.state.color}}>
+        <h1>
+          Change my color
+        </h1>
+        <button onClick={this.changeColor}>
+           Change color
+        </button>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<Toggle />, document.getElementById('app'))
+
+
+***Using SetTimeout and component willmount to render change of background 
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+export class Flashy extends React.Component {
+  componentWillMount() {alert('AND NOW, FOR THE FIRST TIME EVER...  FLASHY!!!!');}
+  render() {
+
+  	
+
+    alert('Flashy is rendering!');
+    
+    return (
+      <h1 style={{ color: this.props.color }}>
+        OOH LA LA LOOK AT ME I AM THE FLASHIEST
+      </h1>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Flashy color='red' />,
+  document.getElementById('app')
+);
+
+
+setTimeout(() => {
+  ReactDOM.render(
+    <Flashy color='green' />,
+    document.getElementById('app')
+  );
+}, 2000);
+
+
+***Fetch random quotes with author and text and new quotes button
+
+import React from "react";
+
+export default class QuotesBox extends React.Component {
+  state = {
+    quotesArray: "",
+    text: "",
+    author: "",
+  };
+
+  componentDidMount() {
+    fetch("https://type.fit/api/quotes")
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState(
+          {
+            quotesArray: data,
+          },
+          () => this.handleClick()
+        );
+      });
+  }
+
+  getRandomQuote = () => {
+    const random = Math.floor(Math.random() * this.state.quotesArray.length);
+    return this.state.quotesArray[random];
+  };
+
+  handleClick = () => {
+    const quote = this.getRandomQuote();
+    this.setState({
+      text: quote.text,
+      author: quote.author,
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <ul>{this.listItems}</ul>
+        <h3>{this.state.text}</h3>
+        <h5>{this.state.author}</h5>
+        <button onClick={this.handleClick}>Fetch Quote</button>
+      </div>
+    );
+  }
+}
+
+***Fetch random Simpson quotes with image author and text and new quotes button
+
+import React from "react";
+
+export default class QuotesBox extends React.Component {
+  state = {
+    quotesArray: "",
+    text: "",
+    author: "",
+    image:''
+  };
+
+  componentDidMount() {
+    fetch("https://thesimpsonsquoteapi.glitch.me/quotes?count=100")
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState(
+          {
+            quotesArray: data,
+          },
+          () => this.handleClick()
+        );
+      });
+  }
+
+  getRandomQuote = () => {
+    const random = Math.floor(Math.random() * this.state.quotesArray.length);
+    return this.state.quotesArray[random];
+  };
+
+  handleClick = () => {
+    const quote = this.getRandomQuote();
+    this.setState({
+      text: quote.quote,
+      author: quote.character,
+      image: quote.image
+    });
+  };
+
+  
+
+  render() {
+    return (
+      <div>
+        <ul>{this.listItems}</ul>
+        <h3>{this.state.text}</h3>
+        <h5>{this.state.author}</h5>
+        <img src={this.state.image}></img>
+        <button onClick={this.handleClick}>Fetch Quote</button>
+        
+      </div>
+    );
+  }
+}
+
+***Add audio element viam mp3 url
+import React, { Component } from "react"
+
+export default class extends Component {
+  playAudio() {
+    const audioEl = document.getElementsByClassName("audio-element")[0]
+    audioEl.play()
+  }
+
+  render() {
+    return (
+      <div>
+        <button onClick={this.playAudio}>
+          <span>Play Audio</span>
+        </button>
+        <audio className="audio-element">
+          <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"></source>
+        </audio>
+      </div>
+    )
+  }
+}
+
+***Conditionaly render if state property is true or false
+
+togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState( { showPersons: !doesShow } );
+  }
+
+//In render
+
+let persons = null;
+
+ if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+          />
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(this, "Max!")}
+            changed={this.nameChangedHandler}
+          >
+            My Hobbies: Racing
+          </Person>
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+          />
+        </div>
+      );
+    }
+
+// In return
+ {persons}
+
+
+
+***Turn state string into javascript array(By adding spit to map function)
+export default class App extends React.Component {
+  state = {
+    userInput: "",
+  };
+
+
+  render() {
+
+    const charList = this.state.userInput.split('').map(ch => {
+      return <CharComponent character={ch} />
+    });
+
+***Radio with play and pause older style React
+import React from 'react'
+
+
+export default class App extends React.Component {
+  constructor(props) {
+  super(props);
+  this.state = {
+    play: false,
+    pause: true,
+  }
+  this.url = "http://streaming.tdiradio.com:8000/house.mp3";
+  this.audio = new Audio(this.url);
+}
+
+play = () => {
+this.setState({ play: true, pause: false })
+  this.audio.play();
+}
+
+pause = () => {
+this.setState({ play: false, pause: true })
+  this.audio.pause();
+}
+
+render() {
+  
+return (
+  <div>
+    <button onClick={this.play}>Play</button>
+    <button onClick={this.pause}>Pause</button>
+  </div>
+  );
+}
+}
+
+***Dynamicly render colors if array length changes
+ const classes = [];
+    if (this.state.persons.length <=2){
+      classes.push('red') // classes = ['red]
+    }
+    if (this.state.persons.length <=1){
+      classes.push('bold') // classes = ['red', 'bold']
+    }
+
+//only added classname to p below and join rest left alone
+    return (
+      <div className="App">
+        <h1>Hi, I'm a React App</h1>
+        <p className={classes.join(' ')} >This is really working!</p>
+        <button style={style} onClick={this.togglePersonsHandler}>
+          Toggle Persons
+        </button>
+        {persons}
+      </div>
+    );
+
+***Using hover on buttons with radium. istall Radium with npm install --save radium
+// look at hover -> thats the only one updated
+render() {
+    const style = {
+      backgroundColor: "green",
+      color: 'white',
+      font: "inherit",
+      border: "1px solid blue",
+      padding: "8px",
+      cursor: "pointer",
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
+    };
+
+//then add with this syntax: -> only changed second line
+style.backgroundColor ='red';
+
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+
+//have to wrap default export with Radium()
+export default Radium(App);
+
+***Using media queries with Radium have to wrap whole app with <Styleroot /> and also import {Styleroot}
+return (
+      <StyleRoot>
+      <div className="App">
+        <h1>Hi, I'm a React App</h1>
+        <p className={classes.join(' ')} >This is really working!</p>
+        <button style={style} onClick={this.togglePersonsHandler}>
+          Toggle Persons
+        </button>
+        {persons}
+      </div>
+      </StyleRoot>
+    );
+
+//use this syntax for media queries
+const style = {
+        '@media (min-width: 500px)': {
+            width: '450px'
+        }
+
+
+//then insert as style={style} property to div
+
+***styled components
+// use npm istall for this
+// first import styled from "styled-components";
+//then create a const with styles without selector
+const StyleDiv = styled.div`
+  width: 60%;
+  margin: 16px auto;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  padding: 16px;
+  text-align: center;
+
+  @media (min-width: 500px) : {
+    width: "450px";
+  }
+`;
+//then use stylediv to wrap as a component
+return (
+    <StyleDiv>
+      <p onClick={props.click}>
+        I'm {props.name} and I am {props.age} years old!
+      </p>
+      <p>{props.children}</p>
+      <input type="text" onChange={props.changed} value={props.name} />
+    </StyleDiv>
+
+***update to latest version of dom
+npm update react react-dom
+
+
+***useEffect -> runs on every re-render with setTimeout(setimeout is optional)
+const cockpit = () => {
+  useEffect(() => {
+    console.log("[cocpit.js use effect]");
+    setTimeout(() => {
+      alert("saved data to cloud");
+    }, 1000);
+  });
+
+***passing on unknown props
+const withClass = (WrappedComponent, className) => {
+    return props => ( 
+        <div className={className}>
+            <WrappedComponent {...props}/>
+        </div>
+    )
+}
+
+***Passing references using Hooks and useRef
+//import useRef
+import React, { useEffect, useRef } from 'react';
+//set variable and pass variable with current can do click here but more available like focus f.e
+const Cockpit = props => {
+  const toggleBtnRef = useRef(null);
+  
+
+
+  useEffect(() => {
+    console.log('[Cockpit.js] useEffect');
+    // Http request...
+    // setTimeout(() => { 
+    //   alert('Saved data to cloud!');
+    // }, 1000);
+    toggleBtnRef.current.click();
+    return () => {
+      console.log('[Cockpit.js] cleanup work in useEffect');
+    };
+  }, []);
+
+//then pass into button
+return (
+    <div className={classes.Cockpit}>
+      <h1>{props.title}</h1>
+      <p className={assignedClasses.join(' ')}>This is really working!</p>
+      <button ref={toggleBtnRef} className={btnClass} onClick={props.clicked}>
+        Toggle Persons
+      </button>
+    </div>
+  );
+
+***Rouding up number to decimals by adding .toFixed(2)
+<p>Current Price: <strong>{props.price.toFixed(2)}</strong></p>
+
+***maping over object array using Object.keys
+updatePurchaseState () {
+      const ingredients = {
+          ...this.state.ingredients
+      };
+      const sum = Object.keys(ingredients)
+      .map(igKey => {
+          return ingredients[igKey]
+      });
+  }
+
+***Importing logo - have to use import bacause of webpack
+import React from 'react'
+
+import burgerLogo from '../../assets/images/logo.png'
+
+const logo = (props) => {
+    return (
+        <div>
+            <img src={burgerLogo} alt="MyBurger"></img>
+        </div>
+    )
+}
+
+export default logo;
+
+***using AXIOS to fetch data from API
+import React, { Component } from "react";
+import axios from "axios";
+
+import Post from "../../components/Post/Post";
+import FullPost from "../../components/FullPost/FullPost";
+import NewPost from "../../components/NewPost/NewPost";
+import "./Blog.css";
+
+class Blog extends Component {
+  state = {
+    posts: [],
+  };
+
+  componentDidMount() {
+    axios.get("https://jsonplaceholder.typicode.com/posts").then((response) => {
+      this.setState({ posts: response.data });
+      console.log(response);
+    });
+  }
+  render() {
+    const posts = this.state.posts.map((post) => {
+      return <Post key={post.id} title={post.title}/>;
+    });
+    return (
+      <div>
+        <section className="Posts">{posts}</section>
+        <section>
+          <FullPost />
+        </section>
+        <section>
+          <NewPost />
+        </section>
+      </div>
+    );
+  }
+}
+
+export default Blog;
+
+//Post.js 
+import React from 'react';
+
+import './Post.css';
+
+const post = (props) => (
+    <article className="Post">
+        <h1>{props.title}</h1>
+        <div className="Info">
+            <div className="Author">Author</div>
+        </div>
+    </article>
+);
+
+export default post;
+
+***Create and Array and fill it with numbers
+Array(9).fill(23)
+
+
+***Clock Component 
+import React from "react";
+
+class Clock extends React.Component {
+  state = {
+    date: new Date(),
+  };
+
+  componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date(),
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+
+export default Clock;
+
+***set an Object as props array!!!
+
+import React from 'react';
+import './App.css';
+
+import FilterableProductTable from './FilterableProductTable'
+
+function App () {
+  return (
+    <FilterableProductTable products={PRODUCTS} />
+  )
+}
+
+const PRODUCTS = [
+  {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
+  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
+  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
+  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
+  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
+  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
+];
+
+
+***destructuring 1st way
+
+// you have object
+const person = {
+  name: 'jason',
+  age: 18
+}
+
+// what do i want? i want the name. so create variable and
+// take {name} from person object
+
+const {name} = person
+
+console.log(name);
+
+
+***destructuring 2nd way
+const person = {
+  name: "jason",
+  age: 18,
+};
+
+//destructure with a function
+const showPerson = ({ name, age }) => {
+  console.log(name, age);
+};
+
+//call with object
+showPerson(person)
+
+
+***real life destructuring from props way1
+
+import React from "react";
+
+const App = () => {
+  return <People />;
+};
+
+const People = () => {
+  const friends = [
+    {
+      name: "john martin",
+      job: "cybersecurity expert",
+      age: "29",
+      company: "lockheed martin",
+    },
+    { name: "peter jackson", job: "trainer", age: "25", company: "facebook" },
+    {
+      name: "jon jones",
+      job: "cybersecurity expert",
+      age: "22",
+      company: "national reserve",
+    },
+  ];
+
+  return (
+    <section>
+      <Person person={friends[0]} />
+      <Person person={friends[1]} />
+      <Person person={friends[2]} />
+    </section>
+  );
+};
+
+const Person = (props) => {
+  const { name, job, age, company } = props.person;
+  return (
+    <article>
+      <h1>{name}</h1>
+      <p>{job}</p>
+      <p>{age}</p>
+      <p>{company}</p>
+      <hr />
+    </article> 
+  );
+};
+
+export default App;
+
+
+
+***real life destructuring from props way2
+//top same as before but different syntax
+//destructure name, job, age, company from person: 
+
+const Person = ({ person: { name, job, age, company } }) => {
+  console.log(name, job, age, company );
+  return (
+    <article>
+      <h1>{name}</h1>
+      <p>{job}</p>
+      <p>{age}</p>
+      <p>{company}</p>
+      <hr />
+    </article>
+  );
+};
+
+***props.children 1st way
+
+const Person = (props) => {
+  const { name, job, age, company } = props.person
+  return (
+    <article>
+      <h1>{name}</h1>
+      <p>{job}</p>
+      <p>{age}</p>
+      <p>{company}</p>
+      {props.children}
+      <hr />
+    </article>
+  );
+};
+
+***props.children 2nd way
+
+//renders everything between openening and closing braces in Component
+import React from "react";
+
+const App = () => {
+  return <People friends={friends} />;
+};
+
+const friends = [
+  {
+    name: "john martin",
+    job: "cybersecurity expert",
+    age: "29",
+    company: "lockheed martin",
+  },
+  { name: "peter jackson", job: "trainer", age: "25", company: "facebook" },
+  {
+    name: "jon jones",
+    job: "cybersecurity expert",
+    age: "22",
+    company: "national reserve",
+  },
+];
+
+const People = () => {
+  return (
+    <section>
+      <Person person={friends[0]}>
+        <p>some info about </p>
+      </Person>
+      <Person person={friends[1]} />
+      <Person person={friends[2]} />
+    </section>
+  );
+};
+
+const Person = ({ children, person: { name, job, age, company } }) => {
+  return (
+    <article>
+      <h1>{name}</h1>
+      <p>{job}</p>
+      <p>{age}</p>
+      <p>{company}</p>
+      {children}
+      <hr />
+    </article>
+  );
+};
+
+export default App;
+
+
+***named imports
+//app.js
+import React from 'react';
+
+import './App.css';
+import {name,age,person} from './data.js'
+
+
+function App() {
+  return (
+    <div className="App">
+     My content
+  <div>{name}</div>
+  <div>{age}</div>
+  <div>{person.name}</div>
+  <div>{person.age}</div>
+    </div>
+  );
+}
+
+export default App;
+
+//data.js
+export const name = "John";
+export const age = "30";
+
+export const person = {
+  name: "peter rat",
+  age: 25,
+};
+
+const secretValue = "secret";
+
+***import everything from above
+import React from 'react';
+
+import './App.css';
+import * as data from './data'
+
+function App() {
+  return (
+    <div className="App">
+     My content
+  <div>{data.name}</div>
+  <div>{data.age}</div>
+  <div>{data.person.name}</div>
+  <div>{data.person.age}</div>
+    </div>
+  );
+}
+
+export default App;
+
+***Map over state array and return props Component
+//booklist.js
+import React, { Component } from "react";
+import Book from "./Book";
+
+export default class BookList extends Component {
+  state = {
+    books: [
+      {
+        book: "book number one",
+        author: "john doe",
+      },
+      {
+        book: "book number two",
+        author: "bobby jones",
+      },
+      {
+        book: "book number three",
+        author: "jenny jones",
+      },
+      {
+        book: "book number four",
+        author: "paddy jerry",
+      },
+      {
+        book: "book number 5",
+        author: "jones black",
+      },
+      {
+        book: "book number 6",
+        author: "peter color",
+      },
+    ],
+  };
+
+  render() {
+    
+    return (
+      <section>
+        <h3>This is our booklist</h3>
+        {this.state.books.map((item, index) => (
+            <Book book={item} key={index}/>
+        ))}
+      </section>
+    );
+  }
+}
+
+//book.js
+import React, { Component } from "react";
+
+export default class Book extends Component {
+  render() {
+    const { book, author } = this.props.book;
+    return (
+      <article>
+        <h3>book: {book} </h3>
+        <h5>author: {author} </h5>
+      </article>
+    );
+  }
+}
+
+***Filter method on state - removes one item that has id of 1
+//removes book from list
+//booklist.js
+import React, { Component } from "react";
+import Book from "./Book";
+import books from "./booksData";
+
+export default class BookList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: books,
+    };
+  }
+
+  handleDelete = (id) => {
+    const sortedList = this.state.books.filter((item) => item.id !== id);
+    this.setState({
+        books: sortedList
+    })
+  };
+
+  render() {
+    return (
+      <section>
+        <h3>This is our booklist</h3>
+        {this.state.books.map((item, index) => (
+          <Book book={item} key={index} handleDelete={this.handleDelete} />
+        ))}
+      </section>
+    );
+  }
+}
+
+//Book.js
+//create anonymous arrow function in handleDelete () => 
+
+import React, { Component } from "react";
+import Button from "./Button";
+
+export default class Book extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 1,
+      showInfo: true,
+    };
+  }
+
+  handleInfo = () => {
+    this.setState({
+      showInfo: !this.state.showInfo,
+    });
+  };
+
+  render() {
+    const { id, book, author, src } = this.props.book;
+    const {handleDelete} = this.props
+    console.log(id);
+    return (
+      <article className="book">
+        <img width="150" alt="amazon" src={src} />
+        <div>
+          <h3>book: {book} </h3>
+          <h5>author: {author} </h5>
+          <button onClick={this.handleInfo}>toggle info</button>
+          {this.state.showInfo && <p>this is info</p>}
+          <Button handleDelete={() => handleDelete(id)}>delete</Button>
+         
+        </div>
+      </article>
+    );
+  }
+}
+
+
+
+
+*** toggle state with oposite 
+//conditional rendering
+//whatever value is in its gona return the oposite true/false
+handleInfo = () => {
+    this.setState({
+      showInfo: !this.state.showInfo,
+    });
+  };
+
+*** Forms - controlled inputs 
+import React, { Component } from "react";
+
+import "./App.css";
+
+export default class App extends React.Component {
+  render() {
+    return <Form />;
+  }
+}
+
+class Form extends Component {
+  state = {
+    firstName: "",
+    lastName: "",
+    people: [],
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const firstName = this.state.firstName;
+    const lastName = this.state.lastName;
+    if (firstName.length > 0 && lastName.length > 0) {
+      const person = ` ${firstName} ${lastName} `;
+      this.setState({
+        people: [...this.state.people, person],
+        firstName: "",
+        lastName: "",
+      });
+    }
+  };
+
+  render() {
+    return (
+      <section>
+        <article>
+          <form onSubmit={this.handleSubmit}>
+            <input
+              name="firstName"
+              value={this.state.firstName}
+              onChange={this.handleChange}
+            ></input>
+            <input
+              name="lastName"
+              value={this.state.lastName}
+              onChange={this.handleChange}
+            ></input>
+            <button type="submit">submit</button>
+          </form>
+        </article>
+        <article>
+          <h1>people</h1>
+          <div>{this.state.people}</div>
+        </article>
+      </section>
+    );
+  }
+}
+
+***use UUID for ids 
+// import {v4 as uuid} from "uuid"; 
+
+***UUID better version
+npm i react-uuid
+import uuid from 'react-uuid'
+
+***React router dom
+//documentation is on React training website (rrd is made by them)
+//install in directory 
+npm i react-router-dom
+//import in index.js and wrap App
+
+import { BrowserRouter as Router } from "react-router-dom";
+
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById("root")
+);
+
+//in App.js import and wrap components
+
+import Home from "./pages/Home";
+import Rooms from "./pages/Rooms";
+import SingleRoom from "./pages/SingleRoom";
+import Error from "./pages/Error";
+
+import { Route, Switch } from "react-router-dom";
+
+function App() {
+  return (
+    <>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/rooms/" component={Rooms} />
+        <Route exact path="/single-room/" component={SingleRoom} />
+        <Route component={Error} />
+      </Switch>
+    </>
+  );
+}
+
+
+***destructuring props.children
+import React from 'react'
+
+export default function Hero({children, hero}) {
+    return (
+        <header className={hero}>
+            {children}
+        </header>
+    )
+}
+
+***seting defaultProps to always render background image
+import React from "react";
+
+export default function Hero({ children, hero }) {
+  return <header className={hero}>{children}</header>;
+}
+
+Hero.defaultProps = {
+  hero: "defaultHero",
+};
+
+*** using local storage and useEffect
+//set up const with getItem
+const initialExpenses = localStorage.getItem("expenses")
+  ? JSON.parse(localStorage.getItem("expenses"))
+  : [];
+// run useEffect with setItem
+useEffect(() => {
+    console.log("we called useEffect");
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+  }, [expenses]);
+
+*****UseEffect - to run only once after load
+
+useEffect(randomQuestion, [])
+
+*****merging clicked react + random questions - code not used
+in interview-questions App
+
+  if (random && react) {
+    function empty() {
+      question = [...oneReactQuestion];
+    }
+    empty();
+    if (question.length <= count) {
+      setCount(0);
+    }
+  }
+
+****SlotMachine
+App.js
+return (
+    <div className="App">
+      <h1>Slot Machine</h1>
+      <Bang s1={'🐯'} s2={'🐯'} s3={'🐯'} />
+      <Bang s1={'🐈'} s2={'🐯'} s3={'🦝'} />
+      <Bang s1={'🦝'} s2={'🐈'} s3={'🐯'} />
+    </div>
+  );
+Bang.js
+export const Bang = ({ s1, s2, s3 }) => {
+  const win = s1 === s2 && s2 === s3;
+
+  return (
+    <div>
+      <span>
+        {s1}
+        {s2}
+        {s3}
+      </span>
+      <h3>{win ? "You win" : "You loose"}</h3>
+    </div>
+
+***** Change color by setting classname conditionaly
+-define a class win and class loose in css with different backgrounds
+-then in return :
+<h3 className={win ? 'win' : 'loose'}>
+
+*****Pokedex
+Pokedex.js
+import React, { Component } from "react";
+import { Pokecard } from "./Pokecard";
+
+export default class Pokedex extends Component {
+  static defaultProps = [
+    { id: 4, name: "Charmander", type: "fire", base_experience: 62 },
+    { id: 7, name: "Squirtle", type: "water", base_experience: 63 },
+    { id: 11, name: "Metapod", type: "bug", base_experience: 72 },
+    { id: 12, name: "Butterfree", type: "flying", base_experience: 178 },
+    { id: 25, name: "Pikachu", type: "electric", base_experience: 112 },
+    { id: 39, name: "Jigglypuff", type: "normal", base_experience: 95 },
+    { id: 94, name: "Gengar", type: "poison", base_experience: 225 },
+    { id: 133, name: "Eevee", type: "normal", base_experience: 65 },
+  ];
+
+  render() {
+    return (
+      <div>
+        <h1>Pokedex</h1>
+        <div className="pokedex">
+          {Pokedex.defaultProps.map((element) => (
+            <Pokecard
+              key={element.id}
+              name={element.name}
+              type={element.type}
+              exp={element.base_experience}
+              img={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${element.id}.png`}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
+
+Pokecard.js
+import React from "react";
+
+export const Pokecard = (props) => {
+  return (
+    <div>
+      <div className="pokecard">
+        <h3>{props.name}</h3>
+        <img src={props.img} alt="pokemon" />
+        <p>Type: {props.type}</p>
+        <p>EXP: {props.exp}</p>
+      </div>
+    </div>
+  );
+};
+
+
+*****dont update state directly when using count in classes
+but add callback function into setState
+
+trippleKill() {
+this.setState(st => {
+return {score: st.score +1};
+});
+this.setState(st => {
+return {score: st.score +1};
+});
+this.setState(st => {
+return {score: st.score +1};
+});
+}
+
+
+
+***** Maps over an array of numbers and picks 6 numbers randomly!!!!
+amazing funtion!!!!
+import React, { Component } from "react";
+import { LotteryBall } from "./LotteryBall";
+
+export default class Lottery extends Component {
+  static defaultProps = {
+    title: "Lotto",
+    maxBalls: 6,
+    maxNum: 40,
+  };
+
+  //create an array of 6 items in state
+  state = {
+    nums: Array.from({ length: this.props.maxBalls }),
+  };
+
+  generate = () => {
+    //this creates a new array of the same length(with map) and for each number
+    //in array pick a number between 0 and 40
+    this.setState((curState) => ({
+      //pass a callback funtion instead of an object to properly get state
+      nums: curState.nums.map(
+        (n) => Math.floor(Math.random() * this.props.maxNum) + 1
+      ),
+      //so we loop over and set state to 6 random numbers
+    }));
+  };
+
+  handleClick = () => {
+    this.generate();
+  };
+
+  render() {
+    return (
+      <section>
+        <h1>{this.props.title}</h1>
+        <div>
+          {this.state.nums.map((n) => (
+            <LotteryBall num={n} />
+          ))}
+        </div>
+
+        <button onClick={this.handleClick}>Generate</button>
+      </section>
+    );
+  }
+}
+
+***** Coin flipper // good pracice for chaging state
+import React, { Component } from "react";
+import Coin from "./Coin";
+import { choice } from "./helpers";
+
+class CoinContainer extends Component {
+  static defaultProps = {
+    coins: [
+      { side: "heads", imgSrc: "https://tinyurl.com/react-coin-heads-jpg" },
+      { side: "tails", imgSrc: "https://images.unsplash.com/photo-1561449898-65bb5a2ee943?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" }
+    ]
+  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      currCoin: null,
+      nFlips: 0,
+      nHeads: 0,
+      nTails: 0
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  flipCoin() {
+    const newCoin = choice(this.props.coins);
+    this.setState(st => {
+      return {
+        currCoin: newCoin,
+        nFlips: st.nFlips + 1,
+        nHeads: st.nHeads + (newCoin.side === "heads" ? 1 : 0),
+        nTails: st.nTails + (newCoin.side === "tails" ? 1 : 0)
+      };
+    });
+  }
+  handleClick(e) {
+    this.flipCoin();
+  }
+  render() {
+    return (
+      <div className='CoinContainer'>
+        <h2>Let's Flip A Coin!</h2>
+        {this.state.currCoin && <Coin info={this.state.currCoin} />}
+        <button onClick={this.handleClick}>Flip Me!</button>
+        <p>
+          Out of {this.state.nFlips} flips, there have been {this.state.nHeads}{" "}
+          heads and {this.state.nTails} tails.
+        </p>
+      </div>
+    );
+  }
+}
+
+export default CoinContainer;
+
+Coin.js
+import React, { Component } from "react";
+import "./Coin.css";
+
+class Coin extends Component {
+  render() {
+    return (
+      <div className='Coin'>
+        <img src={this.props.info.imgSrc} alt={this.props.info.side} />
+      </div>
+    );
+  }
+}
+
+export default Coin;
+
+*****Hangman game - lot of amazing functions
+import React, { Component } from "react";
+import "./Hangman.css";
+import img0 from "./0.jpg";
+import img1 from "./1.jpg";
+import img2 from "./2.jpg";
+import img3 from "./3.jpg";
+import img4 from "./4.jpg";
+import img5 from "./5.jpg";
+import img6 from "./6.jpg";
+import uuid from "react-uuid";
+import { randomWord } from "./words";
+
+class Hangman extends Component {
+  /** by default, allow 6 guesses and use provided gallows images. */
+  static defaultProps = {
+    maxWrong: 6,
+    images: [img0, img1, img2, img3, img4, img5, img6],
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = { nWrong: 0, guessed: new Set(), answer: randomWord() };
+    this.handleGuess = this.handleGuess.bind(this);
+  }
+
+  /** guessedWord: show current-state of word:
+    if guessed letters are {a,p,e}, show "app_e" for "apple"
+  */
+
+  //1.we're taking the 'apple' splitting it into an array (split every character)
+  //2.mapping it into a new array.
+  //- That is going to return the _ character or the actual letter
+  //3.cheking inside this.state.guessed is a new Set().
+  //- Which at the beggining is an empty set. But eventually might contain some
+  // other letters . So if the user guessed the letter we're going to put the letter in
+  // otherwise we place a "_"
+  guessedWord() {
+    return this.state.answer
+      .split("")
+      .map((ltr) => (this.state.guessed.has(ltr) ? ltr : "_"));
+  }
+
+  /** handleGuest: handle a guessed letter:
+    - add to guessed letters
+    - if not in answer, increase number-wrong guesses
+  */
+  //1. theres a evt.target.value
+  // (so if you click on the button you have access to what was clicked on)
+  //2. then we're setting state guessed(which inclued all the letters currently guessed)
+  // and adding whatever ltr pressed into that state
+  //3. then we're potentialy updating nWrong
+  // - so if the answer inclueds that letter we're going to add zero to nWrong
+  // if it doesnt include it we add 1(that increments nWrong by 1)
+  handleGuess(evt) {
+    let ltr = evt.target.value;
+    this.setState((st) => ({
+      guessed: st.guessed.add(ltr),
+      nWrong: st.nWrong + (st.answer.includes(ltr) ? 0 : 1),
+    }));
+  }
+
+  /** generateButtons: return array of letter buttons to render */
+  // we take a string of all letters(26) and split it into an array
+  // and then we map over it for each letter we make a new button
+  // that button has a value set to ltr and a disabled attribute
+  // which is going ot prevent us from clicking a ltr that has been clicked
+  // it has some style for when the button is disabled (.Hangman button:disabled)
+  // so in disabled were checking if the guessed set already has this ltr
+  // and the text inside the button is the ltr itself{ltr}
+  generateButtons() {
+    return "abcdefghijklmnopqrstuvwxyz".split("").map((ltr) => (
+      <button
+        key={uuid()}
+        value={ltr}
+        onClick={this.handleGuess}
+        disabled={this.state.guessed.has(ltr)}
+      >
+        {ltr}
+      </button>
+    ));
+  }
+
+  // reset button
+  handleReset = () => {
+    this.setState({
+      nWrong: 0,
+      guessed: new Set(),
+      answer: randomWord(),
+    });
+  };
+
+  /** render: render game */
+  render() {
+    const gameOver = this.state.nWrong >= this.props.maxWrong;
+    /* Compare the string version of this.state.guessedWord below */
+    const isWinner = this.guessedWord().join("") === this.state.answer && (
+      <p>You Win</p>
+    );
+    let gameState = this.generateButtons();
+    if (isWinner) gameState = "You Win";
+    if (gameOver) gameState = "You Loose";
+    return (
+      <div className="Hangman">
+        <h1>Hangman</h1>
+        <img
+          src={this.props.images[this.state.nWrong]}
+          alt={`Wrong Guesses: ${this.state.nWrong} `}
+        />
+        <p>Wrong Guesses: {this.state.nWrong} </p>
+        <p className="Hangman-word">
+          {!gameOver ? this.guessedWord() : this.state.answer}
+        </p>
+        <p className="Hangman-btns">{gameState}</p>
+        <button id="reset" onClick={this.handleReset}>
+          Restart?
+        </button>
+      </div>
+    );
+  }
+}
+
+export default Hangman;
+
+
+******Using Axios for geting a quote from API
+
+import React, { Component } from "react";
+import axios from "axios";
+
+export default class Loader extends Component {
+  state = {
+    isLoaded: false,
+    quote: "",
+  };
+
+  componentDidMount() {
+    axios.get("https://api.quotable.io/random").then((response) => {
+      setTimeout(
+        function () {
+          this.setState({
+            quote: response.data.content,
+            isLoaded: true,
+          });
+        }.bind(this),
+        3000
+      );
+    });
+  }
+
+  render() {
+    return (
+      <>{this.state.isLoaded ? <h2>{this.state.quote}</h2> : "loading...."}</>
+    );
+  }
+}
+
+***** using Async await sytax with axios
+//can log response, or response.data...
+async componentDidMount() {
+    const url = `https://api.github.com/users/facebook`;
+    let response = await axios.get(url);
+    console.log(response.data);
+  }
+
+***** forceUpdate()
+//can use to cause a re-render without having to update state
+//need to test this first
+handleRerender = () => {
+    this.forceUpdate();
+  };
+
+
+****** using axios and asyng await to get data and set state with it
+
+import React, { Component } from 'react'
+import axios from 'axios'
+const API_URL = 'https://deckofcardsapi.com/api/deck/new/shuffle/'
+
+export default class Deck extends Component {
+
+    state={
+        deck: null
+    }
+    async componentDidMount() {
+     let deck = await axios.get(API_URL);
+        this.setState({deck: deck.data})
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>Card DEaler</h1>
+            </div>
+        )
+    }
+}
+
+
+
+*******React router
+//first install with: npm i react-router-dom
+//then import(from 'react-router-dom') and wrap <App /> with BrowserRouter in index.js
+//then import(from 'react-router-dom') and use <Route /> component in App.js
+//then import and specity props on 
+//<Route exact path="/" component={About} />
+//wrap all used routes in <Switch></Switch>
+
+*example 1 
+import React from "react";
+import "./App.css";
+import { Route, Switch } from "react-router-dom";
+import Component1 from "./Component1";
+import About from "./About";
+import Component2 from "./Component2";
+
+function App() {
+  return (
+    <div className="App">
+      <Switch>
+        <Route exact path="/" component={About} />
+        <Route exact path="/component1" component={Component1} />
+        <Route exact path="/component2" component={Component2} />
+      </Switch>
+    </div>
+  );
+}
+
+export default App;
+
+******incorporating a NavBar into React Router with Link
+//link doesnt send a get request to the server to refresh page
+//it uses JS instead
+// import link and use inside a nav component <Link to="/">About</Link>
+
+
+*example 1
+function App() {
+  return (
+    <div className="App">
+      <nav className="App-nav">
+        <Link className="Link" to="/">
+          About
+        </Link>
+        <Link className="Link" to="/component1">
+          Component1
+        </Link>
+        <Link className="Link" to="/component2">
+          Component2
+        </Link>
+      </nav>
+      <Switch>
+        <Route exact path="/" component={About} />
+        <Route exact path="/component1" component={Component1} />
+        <Route exact path="/component2" component={Component2} />
+      </Switch>
+    </div>
+  );
+}
+
+*example 2 using NavLink
+import React from "react";
+import "./App.css";
+import { Route, Switch, NavLink } from "react-router-dom";
+import Component1 from "./Component1";
+import About from "./About";
+import Component2 from "./Component2";
+
+function App() {
+  return (
+    <div className="App">
+      <nav className="App-nav">
+        <NavLink
+          exact
+          activeClassName="NavLink"
+          to="/"
+          style={{ textDecoration: "none" }}
+        >
+          About
+        </NavLink>
+        <NavLink
+          exact
+          activeClassName="NavLink"
+          to="/component1"
+          style={{ textDecoration: "none" }}
+        >
+          Component1
+        </NavLink>
+        <NavLink
+          exact
+          activeClassName="NavLink"
+          to="/component2"
+          style={{ textDecoration: "none" }}
+        >
+          Component2
+        </NavLink>
+      </nav>
+      <Switch>
+        <Route exact path="/" component={About} />
+        <Route exact path="/component1" component={Component1} />
+        <Route exact path="/component2" component={Component2} />
+      </Switch>
+    </div>
+  );
+}
+
+export default App;
+
+css used here
+.NavLink {
+  color: pink;
+  border-bottom: 1px solid white;
+  text-decoration: none;
+}
+
+.App-nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+
+*****using props with react-router
+//use either component or render in props depending on situation
+//component instantiates a new component1 every time
+//render will re-use the existing component1
+<Switch>
+        <Route exact path="/" component={About} />
+        <Route exact path="/component1" component={Component1} />
+        <Route
+          exact
+          path="/component1"
+          component={() => <Component1 name="component name" />}
+        />
+        <Route
+          exact
+          path="/component1"
+          render={() => <Component1 name="component name" />}
+        />
+        <Route exact path="/component2" component={Component2} />
+</Switch>
+
+******Vending Machine
+// in App.j set up routes wraped with switch
+import React, { Component } from "react";
+import Chips from "./Chips";
+import Sardines from "./Sardines";
+import Soda from "./Soda";
+import Navbar from "./Navbar";
+import VendingMachine from "./VendingMachine";
+import { Route, Switch } from "react-router-dom";
+import "./App.css";
+
+class App extends Component {
+  render() {
+    return (
+      <div className='App'>
+        <Navbar />
+        <Switch>
+          <Route exact path='/' render={() => <VendingMachine />} />
+          <Route exact path='/soda' render={() => <Soda />} />
+          <Route exact path='/sardines' render={() => <Sardines />} />
+          <Route exact path='/chips' render={() => <Chips />} />
+        </Switch>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+//in VendingMAchine.js set up links to all components and background img
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Message from "./Message";
+import "./VendingMachine.css";
+import vendingMachineImg from "./VendingMachine.png";
+
+class VendingMachine extends Component {
+  render() {
+    return (
+      <div
+        className='VendingMachine'
+        style={{ backgroundImage: `url(${vendingMachineImg})` }}
+      >
+        <Message>
+          <h1>hello i am a vending machine. what would you like to eat?</h1>
+        </Message>
+        <Message>
+          <h1>
+            <Link to='/soda'>Soda</Link>
+          </h1>
+          <h1>
+            <Link to='/chips'>Chips</Link>
+          </h1>
+          <h1>
+            <Link to='/sardines'>Sardines</Link>
+          </h1>
+        </Message>
+      </div>
+    );
+  }
+}
+
+export default VendingMachine;
+
+//in individual components set up link to go back
+import React, { Component } from "react";
+import Message from "./Message";
+import { Link } from "react-router-dom";
+import sodaImg from "./Soda.png";
+import "./Soda.css";
+
+class Soda extends Component {
+  render() {
+    return (
+      <div className='Soda'>
+        <img src={sodaImg} alt='coca cola can' />
+        <Message>
+          <h1>SODAAAAA IS MY FAVORITE</h1>
+          <h3>But now I drink sparkling water instead</h3>
+          <p>(I still miss Soda)</p>
+          <Link to='/'>Go Back</Link>
+        </Message>
+
+        <img src={sodaImg} alt='coca cola can' />
+      </div>
+    );
+  }
+}
+
+export default Soda;
+
+******Making a 404 page in React Router
+//add Route with no path at the end of all routes wraped by <Switch></Switch>
+
+ <Route render={() => <h1>Error not found</h1> }/>
+
+
+****** conditional insline styling
+<div className="box" style={{backgroundColor: props.isEmailed ? 'lightgreen' : 'rgba(255, 255, 255, 0.8)'}}>
+
+
+*****Creating a mailto email link in JSX
+ <a href={`mailto:${this.props.email}`}>{this.props.email}</a>
+
+*****React copy to clipboard
+*npm i react-copy-to-clipboard
+import { CopyToClipboard } from "react-copy-to-clipboard";
+//wrap the coponent you want the funtionality for 
+//add prop text to component :
+
+	<CopyToClipboard text={this.props.phone}>
+          <button>copy</button>
+        </CopyToClipboard>
+
+******Context
+(Version 1 Using default value contextType - use only if you have one context)
+1.Create a new folder context 
+2.Inside create a file and set up context: (example - LanguageContext.js)
+	
+	import React from 'react'
+
+	export default React.createContext();
+3.You can pass in a default value 
+	export default React.createContext('english');
+4.Hook up your file by importing LanguageContext.js into that file
+	and seting static contextType to it
+	import React, { Component } from 'react'
+	import LanguageContext from '../contexts/LanguageContext'
+
+	export default class Button extends Component {
+ 	   static contextType = LanguageContext
+
+ 	  render() {
+    	    return (
+   	         <button className='ui button primary'>
+        	        Submit
+     	       </button>
+     	   )
+  	  }
+	}
+5.then use context to display values according to current context value
+	
+  render() {
+    const text = this.context === "english" ? "Submit" : "Odoslať";
+    return <button className="ui button primary">{text}</button>;
+  }
+6. Can stop here or move up to the component that needs to know context 
+value. Find the components that need the context value. 
+Here use Provider to wrap the components that need to know context value.
+Then add value prop to provider and pass in the value that we 
+want to get into our context object.
+export default class App extends Component {
+  state = {
+    language: "english",
+  };
+
+  onLanguageChange = (language) => {
+    this.setState({ language });
+  };
+
+  render() {
+    return (
+      <div className="ui container">
+        <div>
+          Select a language:
+          <i
+            className="flag gb"
+            onClick={() => this.onLanguageChange("english")}
+          ></i>
+          <i
+            className="flag sk"
+            onClick={() => this.onLanguageChange("slovak")}
+          ></i>
+        </div>
+        <LanguageContext.Provider value={this.state.language} >
+        <UserCreate />
+        </LanguageContext.Provider>
+      </div>
+    );
+  }
+}
+
+
+(Version 2 Using Provider and consumer
+ - use when you have multiple contex objects )
+
+// if theres static contextype inside the file you want to hook up
+remove it - (static contextType = LanguageContext)
+1.  add <LanguageContext.Consumer></LanguageContext.Consumer> to
+the file that you want to hook up
+2.inside curly braces provide a funtction as a child component
+	then the funtion will be invoked. Whatever
+value you put inside the funtion is the value inside context.
+ export default class Button extends Component {
+
+  render() {
+    // const text = this.context === "english" ? "Submit" : "Odoslať";
+    return (
+      <button className="ui button primary">
+        <LanguageContext.Consumer>
+          {(value) => (value === "english" ? "Submit" : "Odoslať")}
+        </LanguageContext.Consumer>
+      </button>
+    );
+  }
+}
+
+Creating multiple contexts in the same project as above
+1.Create a new file (ColorContext.js) inside contexts dir inside:
+import React from 'react'
+
+export default React.createContext()
+//can put default value inside braces or not
+2.go to the top component (App.js) and wrap the component
+with name of your file.provider and set value as prop
+
+render() {
+    return (
+      <div className="ui container">
+        <div>
+          Select a language:
+          <i
+            className="flag gb"
+            onClick={() => this.onLanguageChange("english")}
+          ></i>
+          <i
+            className="flag sk"
+            onClick={() => this.onLanguageChange("slovak")}
+          ></i>
+        </div>
+        <ColorContext.Provider value="red">
+          <LanguageContext.Provider value={this.state.language}>
+            <UserCreate />
+          </LanguageContext.Provider>
+        </ColorContext.Provider>
+      </div>
+    );
+  }
+3.then hook up the file(Button.js) by wraping the components with 
+name.consumer then inside as a child create a function  {() =>  }
+as in the file above. Then use the context value inside the () and
+wire it up wherever you want to use it:
+export default class Button extends Component {
+  render() {
+    return (
+      <ColorContext.Consumer>
+      {(color) => 
+       <button className={`ui button ${color}`}>
+       <LanguageContext.Consumer>
+         {(value) => (value === "english" ? "Submit" : "Odoslať")}
+       </LanguageContext.Consumer>
+     </button> }   
+      </ColorContext.Consumer>
+    );
+  }
+}
+
+
+*****Reaload page if error
+window.location.reload()
+
+***** Callback function to kick you out when error one line if statement
+socket.on("join", ({ name, room }, callback) => {
+    const {error, user} = addUser({id: socket.id, name, room});
+
+    if(error) return callback(error)
+
+    socket.join(user.room)
+  });
+
+
+
+***** map over array and return name if applicable
+{
+      users
+        ? (
+          <div>
+            <h1>People currently chatting:</h1>
+            <div className="activeContainer">
+              <h2>
+                {users.map(({name}) => (
+                  <div key={name} className="activeItem">
+                    {name}
+                    <img alt="Online Icon" src={onlineIcon}/>
+                  </div>
+                ))}
+              </h2>
+            </div>
+          </div>
+        )
+        : null
+    }
+
+
+***** add on keypress Enter function
+onKeyPress={(e) => (e.key === "Enter" ? sendMessage(e) : null)}
+
+***** for every other icon alternate between icons
+<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>

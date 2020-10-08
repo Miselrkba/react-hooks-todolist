@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+
+.inputfield{
+  display: flex;
+  justify-content: center;
+}
+
+.MuiTypography-h2 {
+  margin: 0.5em!important
+}

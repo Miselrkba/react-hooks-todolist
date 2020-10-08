@@ -1,0 +1,929 @@
+[ARRAYS]
+
+1.Array.from()
+-creates a new array from string or array or set
+*console.log(Array.from('foo'));
+// expected output: Array ["f", "o", "o"]
+
+*console.log(Array.from([1, 2, 3], x => x + x));
+// expected output: Array [2, 4, 6]
+
+*const set = new Set(['foo', 'bar', 'baz', 'foo']);
+Array.from(set);
+// [ "foo", "bar", "baz" ]
+
+2.Array.isArray()
+-determines whether the passed value is an Array.
+*Array.isArray([1, 2, 3]);  // true
+*Array.isArray({foo: 123}); // false
+
+3.Array.of()
+-creates a new Array from numbers or strings
+*Array.of(1, 2, 3);   // [1, 2, 3]
+
+*Array.of('peter', 'john', 'joe'); //  ["peter", "john", "joe"]
+
+4.Array.concat()
+-is used to merge two or more arrays. Does not change the existing arrays,
+ but instead returns a new array.
+
+*const array1 = ['a', 'b', 'c'];
+const array2 = ['d', 'e', 'f'];
+const array3 = array1.concat(array2);
+
+console.log(array3);
+// expected output: Array ["a", "b", "c", "d", "e", "f"]
+
+5.Array.copyWithin()
+-copies (overwrites) part of an array 
+const array1 = ['a', 'b', 'c', 'd', 'e'];
+
+// copy to index 0 the element at index 3 finish at index 4
+*console.log(array1.copyWithin(0, 3, 4));
+// expected output: Array ["d", "b", "c", "d", "e"]
+
+// copy to index 1 all elements from index 3 to the end
+console.log(array1.copyWithin(1, 3));
+// expected output: Array ["d", "d", "e", "d", "e"]
+
+6. Array.entries()
+-returns a new Array Iterator object that contains the key/value pairs
+ for each index in the array.
+const array1 = ['a', 'b', 'c'];
+
+const iterator1 = array1.entries();
+
+console.log(iterator1.next().value);
+// expected output: Array [0, "a"]
+
+console.log(iterator1.next().value);
+// expected output: Array [1, "b"]
+
+7.Array.every()
+-tests whether all elements in the array pass the test
+ implemented by the provided function. It returns a Boolean value.
+
+const isBelowThreshold = (currentValue) => currentValue < 40;
+
+const array1 = [1, 30, 39, 29, 10, 13];
+
+console.log(array1.every(isBelowThreshold));
+// expected output: true
+
+8.Array.fill()
+-changes all elements in an array to a static value,
+ from a start index (default 0) to an end index (default array.length).
+const array1 = [1, 2, 3, 4];
+
+// fill with 0 from position 2 until position 4
+console.log(array1.fill(0, 2, 4));
+// expected output: [1, 2, 0, 0]
+
+// fill with 5 from position 1
+console.log(array1.fill(5, 1));
+// expected output: [1, 5, 5, 5]
+
+console.log(array1.fill(6));
+// expected output: [6, 6, 6, 6]
+
+9.Array.filter()
+-creates a new array with all elements that pass the test
+ implemented by the provided function.(doesn't modify old array)
+const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+
+const result = words.filter(word => word.length > 6);
+
+console.log(result);
+// expected output: Array ["exuberant", "destruction", "present"]
+
+
+10.Array.find()
+-returns the value of the first element in the provided array
+ that satisfies the provided testing function.
+const array1 = [5, 12, 8, 130, 44];
+
+const found = array1.find(element => element > 10);
+
+console.log(found);
+// expected output: 12
+
+11.Array.findIndex()
+-returns the index of the first element in the array that satisfies the provided testing function.
+ Otherwise, it returns -1, indicating that no element passed the test.Good for
+array of objects.
+
+let fruits = [
+   { type: "Apple", quantity: 9 },
+   { type: "Banana", quantity: 2},
+   { type: "Orange", quantity: 8},
+   { type: "Pear", quantity: 777}
+];
+
+let myIndex = fruits.findIndex(fruit => fruit.type === "Orange"); // Returns 2.
+
+12.Array.flat(/*depth*/)
+-modifies array by removing nested arrays. Parameter specifies depth
+const arr1 = [0, 1, 2, [3, 4]];
+
+console.log(arr1.flat());
+// expected output: [0, 1, 2, 3, 4]
+
+const arr2 = [0, 1, 2, [[[3, 4]]]];
+
+console.log(arr2.flat(2));
+// expected output: [0, 1, 2, [3, 4]]
+
+Flattening and array holes
+const arr5 = [1, 2, , 4, 5];
+arr5.flat();
+// [1, 2, 4, 5]
+
+
+13.flatMap()
+-method returns a new array formed by applying a given callback function
+ to each element of the array, and then flattening the result by one level.
+ It is identical to a map() followed by a flat() of depth 1,
+ but slightly more efficient than calling those two methods separately.
+
+let arr1 = [1, 2, 3, 4];
+
+arr1.map(x => [x * 2]); 
+// [[2], [4], [6], [8]]
+
+arr1.flatMap(x => [x * 2]);
+// [2, 4, 6, 8]
+
+// only one level is flattened
+arr1.flatMap(x => [[x * 2]]);
+// [[2], [4], [6], [8]]
+
+
+14.Array.forEach()
+-executes a provided function once for each array element.
+
+array1.forEach(element => console.log(element));
+
+// expected output: "a"
+// expected output: "b"
+// expected output: "c"
+
+15.Array.includes()
+-determines whether an array includes a certain value among its entries,
+ returning true or false.
+
+const array1 = [1, 2, 3];
+
+console.log(array1.includes(2));
+// expected output: true
+
+const pets = ['cat', 'dog', 'bat'];
+
+console.log(pets.includes('cat'));
+// expected output: true
+
+console.log(pets.includes('at'));
+// expected output: false
+
+16.Array.indexOf()
+- returns the first index at which a given element can be found
+ in the array, or -1 if it is not present. Good for simple arrays
+
+let fruits = [ "Apple", "Banana", "Pear", "Orange"];
+
+let index = fruits.indexOf("Orange"); // Returns 3.
+
+
+17.Array.join()
+-takes an array and creates a string from the elements inside,
+  seperated by provided parameter - , + . Or removes spaces between
+  elements if ('') is provided
+-this method will not change the original array.
+
+const elements = ['Fire', 'Air', 'Water'];
+
+console.log(elements.join());
+// expected output: "Fire,Air,Water"
+
+console.log(elements.join(''));
+// expected output: "FireAirWater"
+
+console.log(elements.join('-'));
+// expected output: "Fire-Air-Water"
+
+18.Array.keys()
+-returns the keys for each index in the array.
+
+const languages = ["JavaScript", "Java", , "C++", "Python"];
+let iterator = languages.keys();
+
+for (let key of iterator) {
+  console.log(key);
+}  
+
+// returns 0 1 2 3 4
+
+
+19.lastIndexOf()
+- returns the last index at which a given element can be found in the array,
+  or -1 if it is not present. 
+
+const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo'];
+
+console.log(animals.lastIndexOf('Dodo'));
+// expected output: 3
+
+console.log(animals.lastIndexOf('Tiger'));
+// expected output: 1
+
+
+20.Array.map()
+-creates a new array with the results of calling a 
+ function for every array element.
+
+const array1 = [1, 4, 9, 16];
+
+// pass a function to map
+const map1 = array1.map(x => x * 2);
+
+console.log(map1);
+// expected output: Array [2, 8, 18, 32]
+
+
+21.Array.pop()
+-removes the last element from an array and returns that element.
+ This method changes the length of the array.
+
+const plants = ['broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato'];
+
+console.log(plants.pop());
+// expected output: "tomato"
+
+console.log(plants);
+// expected output: Array ["broccoli", "cauliflower", "cabbage", "kale"]
+
+
+22.Array.push()
+ads one or more elements to the end of an array and returns
+ the new length of the array.
+const animals = ['pigs', 'goats', 'sheep'];
+
+const count = animals.push('cows');
+console.log(count);
+// expected output: 4
+console.log(animals);
+// expected output: Array ["pigs", "goats", "sheep", "cows"]
+
+animals.push('chickens', 'cats', 'dogs');
+console.log(animals);
+// expected output: Array ["pigs", "goats", "sheep", "cows", "chickens", "cats", "dogs"]
+
+
+23.Array.reduce()
+-reduces the array to a single value. 
+-executes a reducer function provided by you for each value of the array
+-The return value of the function is stored in an accumulator (result/total).
+-doesnt execute the function for array elements without values.
+-does not change the original array.
+
+*example 1 (adding all items in array) :
+const array1 = [1, 2, 3, 4];
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+console.log(array1.reduce(reducer));
+// expected output: 10
+
+// 5 + 1 + 2 + 3 + 4
+console.log(array1.reduce(reducer, 5));
+// expected output: 15
+
+
+*example 2 (Subtract the numbers in the array, starting from the beginning)
+const numbers = [175, 50, 25];
+const reducer = (accumulator, currentValue) => accumulator - currentValue;
+console.log(numbers.reduce(reducer));
+//output 100
+
+
+24.Array.reduceRight()
+-applies a function against an accumulator and each value of the array 
+ (from right-to-left) to reduce it to a single value.
+
+const array1 = [[0, 1], [2, 3], [4, 5]].reduceRight(
+  (accumulator, currentValue) => accumulator.concat(currentValue)
+);
+
+console.log(array1);
+// expected output: Array [4, 5, 2, 3, 0, 1]
+
+25. Array.reverse()
+-everses an array in place. The first array element becomes the last,
+ and the last array element becomes the first.
+-is destructive
+
+const a = [1, 2, 3];
+
+console.log(a); // [1, 2, 3]
+
+a.reverse(); 
+
+console.log(a); // [3, 2, 1]
+
+
+26.Array.shift()
+-removes the first element from an array and returns that removed element.
+ This method changes the length of the array.
+
+const array1 = [1, 2, 3];
+
+const firstElement = array1.shift();
+
+console.log(array1);
+// expected output: Array [2, 3]
+
+console.log(firstElement);
+// expected output: 1
+
+
+27.Array.slice()
+-returns a shallow copy of a portion of an array into a new array object
+ selected from start to end (end not included) where start and end 
+ represent the index of items in that array.
+-the original array will not be modified.
+
+const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+
+console.log(animals.slice(2));
+// expected output: Array ["camel", "duck", "elephant"]
+
+console.log(animals.slice(2, 4));
+// expected output: Array ["camel", "duck"]
+
+console.log(animals.slice(1, 5));
+// expected output: Array ["bison", "camel", "duck", "elephant"]
+
+
+28.Array.some()
+-tests whether at least one element in the array passes the test 
+implemented by the provided function. It returns a Boolean value.
+
+const array = [1, 2, 3, 4, 5];
+
+// checks whether an element is even
+const even = (element) => element % 2 === 0;
+
+console.log(array.some(even));
+// expected output: true
+
+
+29.Array.sort()
+- sorts the elements of an array in place and returns the sorted array.
+ The default sort order is ascending, built upon converting the elements 
+into strings, then comparing their sequences of UTF-16 code units values.
+
+const months = ['March', 'Jan', 'Feb', 'Dec'];
+months.sort();
+console.log(months);
+// expected output: Array ["Dec", "Feb", "Jan", "March"]
+
+const array1 = [1, 30, 4, 21, 100000];
+array1.sort();
+console.log(array1);
+// expected output: Array [1, 100000, 21, 30, 4]
+
+
+30.Array.splice()
+-changes the contents of an array by removing or overwriting existing
+ elements and/or adding new elements in place. Can set it to overwriting 
+ by setting the 2nd parameter.
+
+example1: 
+const months = ['Jan', 'March', 'April', 'June'];
+months.splice(1, 0, 'Feb');
+// inserts at index 1
+console.log(months);
+// expected output: Array ["Jan", "Feb", "March", "April", "June"]
+
+months.splice(4, 1, 'May');
+// replaces 1 element at index 4
+console.log(months);
+// expected output: Array ["Jan", "Feb", "March", "April", "May"]
+
+example2:
+let myFish = ['angel', 'clown', 'mandarin', 'sturgeon']
+let removed = myFish.splice(2, 0, 'drum')
+
+// myFish is ["angel", "clown", "drum", "mandarin", "sturgeon"] 
+// removed is [], no elements removed
+
+31.Array.toLocaleString()
+elements are converted to Strings and are separated by a locale-specific
+ String (such as a comma “,”).
+
+example1:
+var prices = ['￥7', 500, 8123, 12]; 
+prices.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' });
+
+// "￥7,￥500,￥8,123,￥12"
+
+example2:
+const array1 = [1, 'a', new Date('21 Dec 1997 14:12:00 UTC')];
+const localeString = array1.toLocaleString('en', { timeZone: 'UTC' });
+
+console.log(localeString);
+// expected output: "1,a,12/21/1997, 2:12:00 PM",
+// This assumes "en" locale and UTC timezone - your results may vary
+
+
+32.Array.toString()
+-returns a string representing the specified array and its elements.
+
+const array1 = [1, 2, 'a', '1a'];
+
+console.log(array1.toString());
+// expected output: "1,2,a,1a"
+
+
+33. Array.unshift()
+-adds one or more elements to the beginning of an array and returns 
+the new length of the array.
+
+const array1 = [1, 2, 3];
+
+console.log(array1.unshift(4, 5));
+// expected output: 5
+
+console.log(array1);
+// expected output: Array [4, 5, 1, 2, 3]
+
+
+34.Array.values()
+-it gives us all the elements of the array using and iterator
+
+const array1 = ['a', 'b', 'c'];
+const iterator = array1.values();
+
+for (const value of iterator) {
+  console.log(value);
+}
+
+// expected output: "a"
+// expected output: "b"
+// expected output: "c"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*****array.reduce
+//executes a reducer function (that you provide) on each element of the array,
+ resulting in single output value.
+//acc is set to initial value in array, curr is current value in array
+//second argument is callback function acc+ curr
+// reduce loops over and uses callback function
+
+**example 1
+const numbers = [1, -1, 2, 3];
+
+const sum = numbers.reduce((acc, curr) => 
+  acc + curr
+)
+
+console.log(sum);
+
+**example 2
+//also can set initial value to 0 by adding it to the end and adding {} and return
+const numbers = [1, -1, 2, 3];
+
+const sum = numbers.reduce((acc, curr) => {
+ return acc + curr
+}, 0)
+
+console.log(sum);
+
+**example 3 real world
+{expenses.reduce((acc, curr) => {
+            return (acc += parseInt(curr.amount));
+          }, 0)}
+
+
+*****array filter
+//creates new array with elements that pass the testby the provided function.
+
+**example 1
+const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+
+const result = words.filter(word => word.length > 6);
+
+console.log(result);
+// expected output: Array ["exuberant", "destruction", "present"]
+
+** real world example
+let tempExpenses = expenses.filter((item) => item.id !== id);
+//in React then setState
+// setExpenses(tempExpenses);
+
+** real world example 2 !
+
+myArray.filter(x => x.id === '45');
+
+
+*****array find
+//returns the value of the first element in array that satisfies the provided
+ testing function.
+**example 1
+const array1 = [5, 12, 8, 130, 44];
+
+const found = array1.find(element => element > 10);
+
+console.log(found);
+// expected output: 12
+
+**real world example 2
+let expense = expenses.find((item) => item.id === id);
+//then can setState acordingly in React
+let { charge, amount } = expense;
+    setCharge(charge);
+    setAmount(amount);
+    setEdit(true);
+    setId(id);
+
+*****array indexOF
+returns index at which a given element can be found or -1 if it is not present
+
+example 1
+const beasts = ['ant', 'bison', 'camel', 'duck', 'bison'];
+
+console.log(beasts.indexOf('bison'));
+// expected output: 1
+console.log(beasts.indexOf('giraffe'));
+// expected output: -1
+
+***** array slice
+returns a copy of a portion of an array into a new array from start to end 
+(end not included) where start and end represent the index of items 
+
+example 1
+const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+
+console.log(animals.slice(2));
+// expected output: Array ["camel", "duck", "elephant"]
+
+console.log(animals.slice(2, 4));
+// expected output: Array ["camel", "duck"]
+
+console.log(animals.slice(1, 5));
+// expected output: Array ["bison", "camel", "duck", "elephant"]
+
+
+*** array splice
+changes!! an array by removing or replacing existing elements
+and/or adding new elements in place.
+//first argument is index, second if emelent is to be replaced or added
+0 is for add 1 is for replace
+
+example 1
+const months = ['Jan', 'March', 'April', 'June'];
+months.splice(1, 0, 'Feb');
+// inserts at index 1
+console.log(months);
+// expected output: Array ["Jan", "Feb", "March", "April", "June"]
+
+months.splice(4, 1, 'May');
+// replaces 1 element at index 4
+console.log(months);
+// expected output: Array ["Jan", "Feb", "March", "April", "May"]
+
+example 2 
+const numbers = ['one', 'two', 'three', 'four', 'five' ]
+
+numbers.splice(3, 0, 'seven')
+
+console.log(numbers);
+
+*****array.map
+//creates a new array populated with the results of calling 
+a provided function on every element in the calling array.
+//map builds a new array, using it when you aren't using the 
+returned array is an anti-pattern; use forEach or for-of instead.
+
+const array1 = [1, 4, 9, 16];
+
+// pass a function to map
+const map1 = array1.map(x => x * 2);
+
+console.log(map1);
+// expected output: Array [2, 8, 18, 32]
+
+
+*****array.forEAch
+//executes a provided function once for each array element.
+//forEeach doesnt modify existing array map does.
+
+*example1
+const array1 = ['a', 'b', 'c'];
+
+array1.forEach(element => console.log(element));
+
+// expected output: "a"
+// expected output: "b"
+// expected output: "c"
+
+
+*****Array.push
+//adds one or more elements to the end of an array and
+returns the new length of the array.
+
+**example1
+const animals = ['pigs', 'goats', 'sheep'];
+
+const count = animals.push('cows');
+console.log(count);
+// expected output: 4
+console.log(animals);
+// expected output: Array ["pigs", "goats", "sheep", "cows"]
+
+animals.push('chickens', 'cats', 'dogs');
+console.log(animals);
+// expected output: Array ["pigs", "goats", "sheep", "cows", "chickens", "cats", "dogs"]
+
+**example2
+const numbers = [1, 2, 3,4,5]
+
+const newArr = numbers.push('item')
+
+console.log(numbers);
+
+**example 3 amazing push function with .call
+let obj = {
+  length: 0,
+
+  addElem: function addElem(elem) {
+      // obj.length is automatically incremented 
+      // every time an element is added.
+      [].push.call(this, elem)
+  }
+}
+
+// Let's add some empty objects just to illustrate.
+obj.addElem({})
+
+console.log(obj.length)
+// → 2
+
+
+
+*****spread operator
+//copies array and creates new
+
+**example1
+//this breaks it down to single letters
+const udemy = 'udemy'
+
+const spread = [...udemy]
+
+console.log(spread);
+
+**example 2
+//creates the same array - object
+const udemy1 = [
+  {id: 1, charge: 'car', amount: 1900}
+]
+
+const spread1 = [...udemy1]
+
+console.log(spread1);
+console.log(udemy1);
+
+**example 3 with object
+const person = {name: 'Michael', job: 'Software developer'}
+
+const newPerson = {...person, city: 'Los Angeles'}
+
+console.log(newPerson);
+
+**real world example
+//use empty array to push in a new updated array. 
+where items is empty and newItem is being updated dynamicaly
+[...items, newItem]
+
+
+*****Reapeat function to repeate
+const bang = 'Bang'.repeat(10)
+
+
+*****Comparing 3 values
+const win = s1 === s2 && s2 === s3;
+
+
+*****Helper functions
+
+choice function:
+// takes an array of items
+// we pick an index between 0 - last index in that array
+//then return item at that index
+
+export const choice = (items) => {
+  let idx = Math.floor(Math.random() * items.length);
+  return items[idx];
+};
+
+remove funtion:
+//loops through all of the items
+export const remove = (items, item) => {
+  //below we check if its the item were looking for
+  for (let i = 0; i < items.length; i++) {
+    if (items[i] === item) {
+      // once we find it then we return a new array that takes
+      // two slices of the first array from the beggining (0, i)
+      // up until the item we're removing
+      // and then from one after the item we're removing (i + 1)
+      // to the end of the array
+      // and we combine them into one array
+      // so we slice it up and then we return it
+      return [...items.slice(0, i), ...items.slice(i + 1)];
+    }
+  }
+};
+
+then we can use theese funtions in App.js after name importing them
+function App() {
+  let fruit = choice(fruits);
+  console.log(`I'd like one ${fruit} please.`);
+  let remaining = remove(fruits, fruit)
+  console.log(`There are ${remaining.length} foods left`);
+  console.log(`They are ${remaining}`);
+
+***** function that adds 00 in front of a number (used in pokedex)
+// takes a numbe if its greater then 999 then we dont pad it and just return a number
+// `00${number}`.slice(-3) - here we taking two zeros + the number and 
+// slicing three digits out of that and returning the 3 
+// f.e. if we have number 2 we add 00 and slice 3 digits
+// if f.e. is the number is 23 we gonna add 2 and slice the back 3
+
+let padToThree = (number) => (number <= 999 ? `00${number}`.slice(-3) : number);
+
+// Pokemon API below
+const POKE_API = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/`;
+// props below in Pokecard
+img={`${POKE_API}${padToThree(element.id)}.png`}
+
+***** using while - while a condition is true
+class Pokegame extends React.Component {
+  static defaultProps = {
+    pokemon: [
+      { id: 4, name: "Charmander", type: "fire", base_experience: 62 },
+      { id: 7, name: "Squirtle", type: "water", base_experience: 63 },
+      { id: 11, name: "Metapod", type: "bug", base_experience: 72 },
+      { id: 12, name: "Butterfree", type: "flying", base_experience: 178 },
+      { id: 25, name: "Pikachu", type: "electric", base_experience: 112 },
+      { id: 39, name: "Jigglypuff", type: "normal", base_experience: 95 },
+      { id: 94, name: "Gengar", type: "poison", base_experience: 225 },
+      { id: 133, name: "Eevee", type: "normal", base_experience: 65 },
+    ],
+  };
+  render() {
+    let hand1 = [];
+    let hand2 = [...this.props.pokemon];
+    while (hand1.length < hand2.length) {
+      // randIdx gives random index from hand2
+      let randIdx = Math.floor(Math.random() * hand2.length);
+      // randPokemon  (randIdx, 1) - gives 1 element at a time
+      let randPokemon = hand2.splice(randIdx, 1)[0];
+      //and then push it into hand1
+      hand1.push(randPokemon);
+      // so were removing it from hand2 putting it into hand1
+      // and repeating it over and over
+    }
+    return <div>pokegame</div>;
+
+****Splicing one array into two equal ones(from example above pokegame)
+//set up two let variables hand1 hand2
+//one of the variables hand2 uses spread operator to copy the full array
+//set up a while loop while hand1.length in < then hand2.length
+//set up a randomindex let from hand2.length array (Math.f(M.r())
+// set up a let randPokemon to splice hand2.(randomindex, 1)[0];
+push randPokemon into hand1.
+//log both hand one and two
+
+*example2 from react-sarch bar tutorial
+//in splice first para is index second para number of items
+const PRODUCTS = [
+    {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
+    {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
+    {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
+    {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
+    {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
+    {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
+  ];
+  
+
+  let product1 = [];
+  let product2 = [...PRODUCTS];
+  while(product1 < product2){
+    //   let rand = Math.floor(Math.random() * product2.length);
+      let randProduct = product2.splice(0, 1)[0];
+      product1.push(randProduct);
+
+  } 
+
+  console.log(product1);
+  console.log(product2);
+
+*****Count up / add up all numbers in array from pokedex game above!!!
+//Amazing funtion to know
+
+// count total experience from hand1 array
+// count experice for each pokemon start at 0
+let exp1 = hand1.reduce((exp, pokemon) => exp + pokemon.base_experience, 0);
+
+*****Spread operator
+[...this.state.icons, newIcon] - this will copy all icons in state
+and add one new Icon
+
+example: 
+const array = ["John", "Peter"];
+
+const newName = "Michael";
+
+console.log([...array, newName]);
+
+console.log(array);
+
+*****Creates an Array an populates it with numbers 
+ state = {
+    nums: Array.from({ length: this.props.maxBalls }),
+  };
+
+//these will be undefined but can later be used with.map (used in lottery app)
+ generate = () => {
+    //this creates a new array of the same length(with map) and for each number
+    //in array pick a number between 0 and 40
+    this.setState((curState) => ({
+      //pass a callback funtion instead of an object to properly get state
+      nums: curState.nums.map(
+        (n) => Math.floor(Math.random() * this.props.maxNum) + 1
+      ),
+      //so we loop over and set state to 6 random numbers
+    }));
+  };
+
+*****helper function to return random item at random index from array
+
+function choice(arr) {
+  let randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
+}
+
+export { choice };
+
+
+*****Amazing do while loop!!!
+// changes colors - never picks the same color
+pickColor = () => {
+    let newColor;
+    do {
+      newColor = choice(this.props.allColors);
+      //below you set the condition for stoping
+      //so if the color is already in state it stops
+      //this way you can never have two same colors showing
+    } while (newColor === this.state.color);
+
+    this.setState({
+      color: newColor,
+    });
+  };
+
+******Amazing function uses split, map and has
+// this.state.answer is an array of strings
+guessedWord() {
+    return this.state.answer
+      .split("")
+      .map((ltr) => (this.state.guessed.has(ltr) ? ltr : "_"));
+  }
+
+
+*****every function from lights out game
+//check if every row in every cell is false
+    let hasWon = board.every((row) => row.every((cell) => !cell));
+
+*****callback function to kick you out of a funtction on error
+if(error) return callback(error)
+
+
+***** checks whether an element is even
+const even = (element) => element % 2 === 0;
